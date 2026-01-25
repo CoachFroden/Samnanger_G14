@@ -14,23 +14,23 @@ window.lagetData.posisjoner = ["Keeper", "Forsvar", "Midtbane", "Angrep"];
 
 window.lagetData.spillere = [
   { nr: 1, navn: "Theodor Vinje Våge", rolle: "Keeper", image: "Theodor.png" },
-  { nr: 12, navn: "Thage Haukenes", rolle: "Keeper", image: "/Thage.png" },
-  { nr: 2, navn: "Gabriel Bjørkmo", rolle: "Forsvar", image: "drakter/Gabriel.png" },
-  { nr: 3, navn: "Sondre Bruvik Nordvik", rolle: "Forsvar", image: "drakter/Sondre.png" },
-  { nr: 4, navn: "William Langeland Jørgensen", rolle: "Midtbane", image: "drakter/William.png" },
-  { nr: 5, navn: "Nicolai Lønnebakken Dalseid", rolle: "Midtbane", image: "drakter/Nicolai.png" },
-  { nr: 6, navn: "Liam Moss Liøen", rolle: "Angrep", image: "drakter/Liam.png" },
-  { nr: 7, navn: "Torvald Oma Høysæter", rolle: "Forsvar", image: "drakter/Torvald.png" },
-  { nr: 8, navn: "Brage Bjørnås Teige", rolle: "Forsvar", image: "drakter/Brage.png" },
-  { nr: 9, navn: "Lars Frøland", rolle: "Midtbane", image: "drakter/Lars.png" },
-  { nr: 10, navn: "Snorre Naalsund Aldal", rolle: "Forsvar", image: "drakter/Snorre.png" },
-  { nr: 11, navn: "Ask Aldal", rolle: "Forsvar", image: "drakter/Ask.png" },
-  { nr: 13, navn: "Lukas Leander Steinsland Trengereid", rolle: "Midtbane", image: "drakter/Lukas.png" },
-  { nr: 14, navn: "Oliver Rondestveit", rolle: "Angrep", image: "drakter/Oliver.png" },
-  { nr: 17, navn: "Martin Flatjord Sandvik", rolle: "Forsvar", image: "drakter/Martin.png" },
-  { nr: 18, navn: "Sverre Erstad", rolle: "Midtbane", image: "drakter/Sverre.png" },
-  { nr: 19, navn: "Noah Langeland Drevsjø", rolle: "Midtbane", image: "drakter/Noah.png" },
-  { nr: 16, navn: "Noah Fure Nytveit", rolle: "Angrep", image: "drakter/Nytveit.png" }
+  { nr: 12, navn: "Thage Haukenes", rolle: "Keeper", image: "Thage.png" },
+  { nr: 2, navn: "Gabriel Bjørkmo", rolle: "Forsvar", image: "Gabriel.png" },
+  { nr: 3, navn: "Sondre Bruvik Nordvik", rolle: "Forsvar", image: "Sondre.png" },
+  { nr: 4, navn: "William Langeland Jørgensen", rolle: "Midtbane", image: "William.png" },
+  { nr: 5, navn: "Nicolai Lønnebakken Dalseid", rolle: "Midtbane", image: "Nicolai.png" },
+  { nr: 6, navn: "Liam Moss Liøen", rolle: "Angrep", image: "Liam.png" },
+  { nr: 7, navn: "Torvald Oma Høysæter", rolle: "Forsvar", image: "Torvald.png" },
+  { nr: 8, navn: "Brage Bjørnås Teige", rolle: "Forsvar", image: "Brage.png" },
+  { nr: 9, navn: "Lars Frøland", rolle: "Midtbane", image: "Lars.png" },
+  { nr: 10, navn: "Snorre Naalsund Aldal", rolle: "Forsvar", image: "Snorre.png" },
+  { nr: 11, navn: "Ask Aldal", rolle: "Forsvar", image: "Ask.png" },
+  { nr: 13, navn: "Lukas Leander Steinsland Trengereid", rolle: "Midtbane", image: "Lukas.png" },
+  { nr: 14, navn: "Oliver Rondestveit", rolle: "Angrep", image: "Oliver.png" },
+  { nr: 17, navn: "Martin Flatjord Sandvik", rolle: "Forsvar", image: "Martin.png" },
+  { nr: 18, navn: "Sverre Erstad", rolle: "Midtbane", image: "Sverre.png" },
+  { nr: 19, navn: "Noah Langeland Drevsjø", rolle: "Midtbane", image: "Noah.png" },
+  { nr: 16, navn: "Noah Fure Nytveit", rolle: "Angrep", image: "Nytveit.png" }
 ];
 
 /* -----------------------------------------------------
@@ -287,5 +287,6 @@ function connectCloseButtons() {
 }
 
 setTimeout(connectCloseButtons, 100);
+
 
 
