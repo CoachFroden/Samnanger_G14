@@ -1,3 +1,59 @@
-<section>
-  <h1>Her kommer det etterhvert analyser fra kamper vi har spilt</h1>
-</section>
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <title>Kampanalyse</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+  <main class="container">
+    <h1>Kampanalyse</h1>
+
+    <form id="kampanalyseForm">
+      <label>Dato</label>
+      <input type="date" id="dato" required>
+
+      <label>Motstander</label>
+      <input type="text" id="motstander" required>
+
+      <label>Type kamp</label>
+      <select id="type">
+        <option>Seriekamp</option>
+        <option>Treningskamp</option>
+        <option>Turnering</option>
+      </select>
+
+      <label>Hva fungerte bra</label>
+      <textarea id="fungerteBra"></textarea>
+
+      <label>Hva vi skal jobbe videre med</label>
+      <textarea id="jobbeVidere"></textarea>
+
+      <label>Angrep</label>
+      <textarea id="angrep"></textarea>
+
+      <label>Forsvar</label>
+      <textarea id="forsvar"></textarea>
+
+      <label>Overganger</label>
+      <textarea id="overganger"></textarea>
+
+      <label>Fokus videre</label>
+      <textarea id="fokusVidere"></textarea>
+
+      <label>Generell refleksjon</label>
+      <textarea id="refleksjon"></textarea>
+
+      <button type="submit">Lagre kampanalyse</button>
+    </form>
+
+    <section id="historikk">
+      <h2>Tidligere analyser</h2>
+      <ul id="analyseListe"></ul>
+    </section>
+  </main>
+
+  <script type="module" src="kampanalyse.js"></script>
+</body>
+</html>

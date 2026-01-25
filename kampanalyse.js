@@ -1,33 +1,56 @@
-// === STANDARD JS-MAL FOR UNDERSIDE ===
-// Denne koden kan kopieres til alle *side.js*-filer.
-// Den kjøres når HTML-en for siden er lastet inn via main.js.
+import { db } from "../js/firebase.js";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  orderBy,
+  query,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-console.log("📄 kampevaluering.js lastet");
+const form = document.getElementById("kampanalyseForm");
+const liste = document.getElementById("analyseListe");
 
-// Init-funksjon – alt du vil skal skje når siden vises
-function initPage() {
-  console.log("➡️ Kjører initPage() for [FILNAVN]");
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-  // 🔹 Eksempel: legg til event listeners
-  // const knapp = document.querySelector(".min-knapp");
-  // if (knapp) {
-  //   knapp.addEventListener("click", () => {
-  //     console.log("Knapp klikket på [FILNAVN]");
-  //   });
-  // }
+  await addDoc(collection(db, "kampanalyser"), {
+    dato: dato.value,
+    motstander: motstander.value,
+    type: type.value,
+    fungerteBra: fungerteBra.value,
+    jobbeVidere: jobbeVidere.value,
+    angrep: angrep.value,
+    forsvar: forsvar.value,
+    overganger: overganger.value,
+    fokusVidere: fokusVidere.value,
+    refleksjon: refleksjon.value,
+    createdAt: serverTimestamp()
+  });
 
-  // 🔹 Eksempel: fade inn sideinnholdet
-  const main = document.getElementById("main");
-  main.style.opacity = 0;
-  main.style.transition = "opacity 0.4s ease";
-  setTimeout(() => {
-    main.style.opacity = 1;
-  }, 50);
+  form.reset();
+  hentAnalyser();
+});
 
-  // 🔹 Eksempel: hent eller endre elementer spesifikt for denne siden
-  // const tittel = document.querySelector(".page-title");
-  // if (tittel) tittel.textContent = "Oppdatert tittel for [FILNAVN]";
+async function hentAnalyser() {
+  liste.innerHTML = "";
+
+  const q = query(
+    collection(db, "kampanalyser"),
+    orderBy("dato", "desc")
+  );
+
+  const snapshot = await getDocs(q);
+
+  snapshot.forEach(doc => {
+    const data = doc.data();
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <strong>${data.dato} – ${data.motstander}</strong><br>
+      Fokus: ${data.fokusVidere}
+    `;
+    liste.appendChild(li);
+  });
 }
 
-// Vent litt slik at HTML faktisk er lastet inn
-setTimeout(initPage, 100);
+hentAnalyser();
