@@ -1,0 +1,215 @@
+<div class="main-container">
+
+  <!-- ============================
+       HEADER
+  ============================= -->
+  <header class="main-heading">
+    <h1>Samnanger G14</h1>
+    <p class="subtitle">Samhold – Utvikling – Fotballglede</p>
+  </header>
+
+  <!-- ============================
+       NESTE KAMP
+  ============================= -->
+  <section class="info-card" aria-labelledby="nextMatchTitle">
+    <h2 id="nextMatchTitle">
+      <i class="fa-solid fa-trophy" aria-hidden="true"></i>
+      Neste kamp
+    </h2>
+    <p>Ingen kommende kamp registrert ennå.</p>
+  </section>
+
+  <!-- ============================
+       UKENS FOKUS
+  ============================= -->
+  <section class="info-card" aria-labelledby="focusTitle">
+    <h2 id="focusTitle">
+      <i class="fa-solid fa-bullseye" aria-hidden="true"></i>
+      Ukens fokus
+    </h2>
+    <p>Forbedre samhandling i press og hurtig gjenvinning etter balltap.</p>
+  </section>
+
+  <!-- ============================
+       KORT-GRID
+  ============================= -->
+  <section class="card-grid">
+
+    <!-- ============================
+         LAGET-KORT
+    ============================= -->
+    <div class="card card-yellow team-card" id="team-card" aria-labelledby="teamCardTitle">
+
+      <div class="team-closed" role="button" tabindex="0">
+        <div class="card-top">
+          <i class="fa-solid fa-people-group" aria-hidden="true"></i>
+          <h3 id="teamCardTitle">Laget</h3>
+        </div>
+
+        <div class="card-body">
+          <p class="muted" id="teamAge">Spillerstall 2025</p>
+          <p class="big" id="teamCount">– spillere –</p>
+        </div>
+
+        <div class="card-footer">
+          <button class="btn-small" id="teamToggleBtn">Vis mer</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================
+         ØVRIGE KORT
+    ============================= -->
+
+    <a href="#" onclick="loadPage('treninger')" class="card card-blue">
+      <i class="fa-solid fa-calendar-days"></i>
+      <h3>Treninger</h3>
+      <p>Trykk for å åpne treninger.</p>
+    </a>
+
+    <a href="#" onclick="loadPage('vintertrening')" class="card card-cyan">
+      <i class="fa-solid fa-snowflake"></i>
+      <h3>Vintertrening</h3>
+      <p>Trykk for å åpne vintertrening.</p>
+    </a>
+
+    <a href="#" onclick="loadPage('kampanalyse')" class="card card-purple">
+      <i class="fa-solid fa-chart-line"></i>
+      <h3>Kampanalyse</h3>
+      <p>Trykk for å åpne kampanalyse.</p>
+    </a>
+
+    <a href="#" onclick="loadPage('trenerhjorne')" class="card card-orange">
+      <i class="fa-solid fa-comments"></i>
+      <h3>Trenerhjørnet</h3>
+      <p>Trykk for å åpne trenerhjørnet.</p>
+    </a>
+
+    <a href="#" onclick="loadPage('visualisering')" class="card card-darkblue">
+      <i class="fa-solid fa-eye"></i>
+      <h3>Visualisering</h3>
+      <p>Trykk for å åpne visualisering.</p>
+    </a>
+
+  </section>
+
+  <!-- ============================
+       OM OSS-KNAPP
+  ============================= -->
+  <section class="about-team">
+    <button id="toggleAbout" class="dropdown-btn">
+      <i class="fa-solid fa-caret-down"></i>
+      Om oss
+    </button>
+  </section>
+
+  <!-- ============================
+       OM OSS – MODAL
+  ============================= -->
+  <div id="aboutModalOverlay" class="modal-overlay" hidden></div>
+
+  <div id="aboutModal" class="modal-box" hidden>
+    <button id="closeAboutModal" class="modal-close">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <h2>Om oss</h2>
+
+    <p>
+      Samnanger G14 handler om samhold, utvikling og ekte fotballglede.
+      Vi ønsker å skape trygge rammer hvor alle spillere får vokse både som lagkamerater og som mennesker.
+    </p>
+
+    <p>
+      Gjennom disiplin, engasjement og lagånd jobber vi for å bli bedre – sammen.
+      Hver trening og kamp er et nytt steg mot å nå vårt fulle potensial.
+    </p>
+  </div>
+
+  <!-- ============================
+       LAGET – MODAL
+  ============================= -->
+  <div id="teamModalOverlay" class="modal-overlay" hidden></div>
+
+  <div id="teamModal" class="modal-box" hidden>
+    <button id="closeTeamModal" class="modal-close">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <h2>Laget</h2>
+
+    <p><strong>Trener:</strong> <span id="modalTeamCoach"></span></p>
+    <p><strong>Kaptein:</strong> <span id="modalTeamCaptain"></span></p>
+
+    <p><strong>Posisjoner:</strong></p>
+    <ul id="modalPositionList" class="inline-list"></ul>
+
+    <div style="margin-top:1.4rem; text-align:center;">
+      <a href="#" onclick="loadPage('laget')" class="btn-ghost">Gå til lagsiden</a>
+
+    </div>
+  </div>
+
+</div>
+<script>
+function initForside() {
+
+  // --- OM OSS MODAL ---
+  const aboutBtn = document.getElementById("toggleAbout");
+  const aboutModal = document.getElementById("aboutModal");
+  const aboutOverlay = document.getElementById("aboutModalOverlay");
+  const closeAbout = document.getElementById("closeAboutModal");
+
+  if (aboutBtn) {
+    aboutBtn.onclick = () => {
+      aboutModal.hidden = false;
+      aboutOverlay.hidden = false;
+      aboutModal.classList.add("active");
+      aboutOverlay.classList.add("active");
+    };
+  }
+
+  if (closeAbout) {
+    closeAbout.onclick = () => {
+      aboutModal.classList.remove("active");
+      aboutOverlay.classList.remove("active");
+      setTimeout(() => {
+        aboutModal.hidden = true;
+        aboutOverlay.hidden = true;
+      }, 250);
+    };
+  }
+
+  // --- LAGET MODAL ---
+  const teamBtn = document.getElementById("teamToggleBtn");
+  const teamModal = document.getElementById("teamModal");
+  const teamOverlay = document.getElementById("teamModalOverlay");
+  const closeTeam = document.getElementById("closeTeamModal");
+
+  if (teamBtn) {
+    teamBtn.onclick = () => {
+      teamModal.hidden = false;
+      teamOverlay.hidden = false;
+      teamModal.classList.add("active");
+      teamOverlay.classList.add("active");
+    };
+  }
+
+  if (closeTeam) {
+    closeTeam.onclick = () => {
+      teamModal.classList.remove("active");
+      teamOverlay.classList.remove("active");
+      setTimeout(() => {
+        teamModal.hidden = true;
+        teamOverlay.hidden = true;
+      }, 250);
+    };
+  }
+}
+
+document.addEventListener("DOMContentLoaded", initForside);
+
+// Hvis siden lastes via loadPage():
+setTimeout(() => initForside(), 50);
+</script>
+

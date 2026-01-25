@@ -1,0 +1,238 @@
+/* =========================================
+   BASE HEADER
+========================================= */
+
+#header > header {
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+
+  background: linear-gradient(145deg, #1c1e22, #101113);
+  border: 2px solid #ffd42a;
+  border-radius: 40px;
+    box-shadow:
+    0 0 20px rgba(80, 140, 255, 0.6),
+    0 0 40px rgba(80, 140, 255, 0.35);
+  padding: 12px 28px;
+
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(8px);
+  box-sizing: border-box;
+}
+
+/* =========================================
+   BRAND / LOGO
+========================================= */
+
+#header > header .brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#header > header .logo {
+  font-size: 2.6rem;
+  color: #ffd42a;
+  margin-right: 5px;
+  filter: drop-shadow(0 0 8px rgba(255, 212, 42, 0.5));
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.logo:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 16px rgba(255, 212, 42, 0.8));
+}
+
+#header > header .header-title h1 {
+  color: #ffd42a;
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0;
+  white-space: nowrap;
+}
+
+#header > header .header-title p {
+  color: #ccc;
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+/* =========================================
+   NAVIGATION – DESKTOP DEFAULT
+========================================= */
+
+#header > header nav {
+  display: flex;
+  align-items: center;
+}
+
+#header > header nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+#header > header nav button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.2s;
+
+}
+
+#header > header nav button:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   ICON EFFECTS
+========================================= */
+
+/* Normal ikonfarge */
+#header > header nav button i {
+  color: #4ea8ff; /* Samnanger blå */
+  transition: color 0.25s ease, text-shadow 0.25s ease, transform 0.25s ease;
+}
+
+/* Hover – lilla glød */
+#header > header nav button:hover i {
+  color: #c08aff; /* lys-lilla */
+  text-shadow: 0 0 10px rgba(192,138,255,0.65);
+  transform: scale(1.08);
+}
+
+
+
+@keyframes frostPulse {
+  0% { text-shadow: 0 0 8px rgba(102,204,255,0.3); }
+  50% { text-shadow: 0 0 30px rgba(102,204,255,1); }
+  100% { text-shadow: 0 0 8px rgba(102,204,255,0.3); }
+}
+
+@keyframes frostPulseRedSoft {
+  0%   { text-shadow: 0 0 5px rgba(255,120,120,0.35); }
+  50%  { text-shadow: 0 0 12px rgba(255,120,120,0.60); }
+  100% { text-shadow: 0 0 5px rgba(255,120,120,0.35); }
+}
+
+/* =========================================
+   PAGE OFFSET
+========================================= */
+main { padding-top: 120px; }
+
+/* =========================================
+   MOBILE (max 768px)
+========================================= */
+
+@media (max-width: 768px) {
+
+  #header > header {
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px 18px;
+    background: rgba(0, 0, 0, 0.92);
+  }
+
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    color: #ffd42a;
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+
+  #header > header nav ul {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 75%;
+    max-width: 400px;
+
+    background: rgba(0, 0, 0, 0.95);
+    border: 2px solid #ffd42a;
+    border-radius: 20px;
+    padding: 10px 30px;
+    margin-top: 5px;
+
+    display: none;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* === RING OG GLØD RUNDT BRAND PÅ MOBIL === */
+  #header > header .brand {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+
+    background: rgba(0, 0, 0, 0.75);
+    border: 2px solid #ffd42a;
+    border-radius: 40px;
+    padding: 8px 16px;
+
+    box-shadow: 
+      0 0 25px rgba(255, 212, 42, 0.7),
+      inset 0 0 8px rgba(255, 212, 42, 0.3);
+
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+
+  #header > header .brand:hover {
+    transform: scale(1.03);
+    box-shadow: 
+      0 0 35px rgba(255, 212, 42, 1),
+      inset 0 0 12px rgba(255, 212, 42, 0.4);
+  }
+
+  #header > header nav ul.show {
+    display: flex;
+  }
+
+  main {
+    padding-top: 130px;
+  }
+}
+
+/* =========================================
+   DESKTOP (min 769px)
+========================================= */
+
+@media (min-width: 769px) {
+
+  /* 🚫 SKJUL HAMBURGER */
+  .menu-toggle {
+    display: none !important;
+  }
+
+  /* ✔ VIS VANLIG MENY */
+  #header > header nav ul {
+    display: flex !important;
+  }
+}

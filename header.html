@@ -1,0 +1,30 @@
+<header id="header">
+  <!-- Logo + tittel -->
+  <div class="brand" onclick="loadPage('forside')" style="cursor: pointer;">
+    <i class="fa-solid fa-futbol logo"></i>
+    <div class="header-title">
+      <h1>Samnanger IL</h1>
+      <p>Fotball</p>
+    </div>
+  </div>
+
+  <!-- Navigasjon -->
+  <nav>
+
+    <!-- Hamburger (mobil) -->
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <!-- Menyliste -->
+    <ul id="menu">
+      <li><button onclick="loadPage('laget')"><i class="fa-solid fa-users"></i> Laget</button></li>
+      <li><button onclick="loadPage('trening')"><i class="fa-solid fa-dumbbell"></i> Trening</button></li>
+      <li><button onclick="loadPage('vintertrening')"><i class="fa-solid fa-snowflake"></i> Vintertrening</button></li>
+      <li><button onclick="loadPage('kampanalyse')"><i class="fa-solid fa-chart-line"></i> Kampanalyse</button></li>
+      <li><button onclick="loadPage('trenerhjornet')"><i class="fa-solid fa-chalkboard-user"></i> Trenerhjørnet</button></li>
+      <li><button onclick="loadPage('visualisering')"><i class="fa-solid fa-eye"></i> Visualisering</button></li>
+    </ul>
+
+  </nav>
+</header>

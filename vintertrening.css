@@ -1,0 +1,377 @@
+/* === VINTERTRENING.CSS — ryddet og optimalisert versjon === */
+
+/* --- Grunnoppsett --- */
+.vintertrening {
+  background-color: #000;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+  padding: 3rem 1rem 5rem;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* --- Header --- */
+.vintertrening .header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.vintertrening .header h1 {
+  font-size: 2.8rem;
+  color: #69c3ff;
+  text-shadow: 0 0 10px rgba(0, 150, 255, 0.7);
+}
+
+.vintertrening .header .meta {
+  color: #bbb;
+  font-size: 1.2rem;
+}
+
+/* --- Felles boksestil --- */
+.vintertrening .box {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+/* === Oppvarming — metallic orange === */
+.vintertrening .warmup {
+  max-width: 900px;                 
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  color: #fff;
+  background: rgba(255, 120, 0, 0.45);
+  border: 1px solid rgba(255, 170, 80, 0.75);
+  box-shadow: 0 0 25px rgba(255, 140, 0, 0.35);
+  backdrop-filter: blur(3px);
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+/* --- Glød-animasjon (oransje) --- */
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 15px rgba(255, 150, 0, 0.3),
+                0 0 30px rgba(255, 120, 0, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 180, 0, 0.7),
+                0 0 60px rgba(255, 140, 0, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(255, 150, 0, 0.3),
+                0 0 30px rgba(255, 120, 0, 0.2);
+  }
+}
+
+/* --- Warmup overskrift --- */
+.vintertrening .warmup h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.vintertrening .warmup h2::before {
+  content: "🔥";
+  font-size: 1.4rem;
+}
+
+/* --- Eksempler inne i warmup --- */
+.vintertrening .warmup .examples {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 0.75rem;
+  padding: 1rem 1.5rem;
+  margin-top: 1rem;
+  text-align: left;
+  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+.vintertrening .warmup .examples strong {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #ffd8a8;
+}
+
+/* === Struktur for økta — grønn tone === */
+.vintertrening .structure {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  color: #fff;
+  text-align: left;
+  background: rgba(0, 100, 60, 0.25);
+  border: 1px solid rgba(0, 200, 100, 0.4);
+  box-shadow: 0 0 20px rgba(0, 180, 100, 0.25);
+  backdrop-filter: blur(4px);
+  animation: greenGlow 5s ease-in-out infinite;
+}
+
+@keyframes greenGlow {
+  0%   { box-shadow: 0 0 10px rgba(0,180,100,0.25); }
+  50%  { box-shadow: 0 0 25px rgba(0,255,150,0.45); }
+  100% { box-shadow: 0 0 10px rgba(0,180,100,0.25); }
+}
+
+.vintertrening .structure h2 {
+  color: #69c3ff;
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* --- Stasjonsgrid --- */
+.vintertrening .stations-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 900px;
+  margin: 3rem auto;
+  justify-items: stretch;
+}
+
+.vintertrening .station {
+  background: rgba(0, 50, 100, 0.25);
+  border: 1px solid rgba(0, 150, 255, 0.5);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(0, 150, 255, 0.15);
+}
+
+.vintertrening .station:hover {
+  background-color: rgba(0, 90, 180, 0.35);
+  box-shadow: 0 0 25px rgba(0, 180, 255, 0.5);
+  transform: translateY(-4px);
+}
+
+.vintertrening .station h2 {
+  color: #69c3ff;
+  font-size: 1.2rem;
+  margin-bottom: 0.6rem;
+}
+
+/* --- Trenertips med lås --- */
+.vintertrening .coach-tips {
+  position: relative;
+  background: rgba(0, 100, 200, 0.2);
+  border: 1px solid rgba(0, 150, 255, 0.4);
+  box-shadow: 0 0 15px rgba(0, 150, 255, 0.2);
+  text-align: center;
+  transition: all 0.4s ease;
+}
+
+/* Header */
+.vintertrening .coach-tips .tips-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.vintertrening .coach-tips .tips-header h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #69c3ff;
+}
+
+/* Hengelås */
+.lock {
+  display: inline-block;
+  font-size: 1.5rem;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.lock.open {
+  transform: rotate(-25deg) scale(1.3);
+  opacity: 0.9;
+}
+
+.lock.close {
+  transform: rotate(0deg) scale(1);
+  opacity: 1;
+}
+
+/* X-knapp */
+.vintertrening .coach-tips .close-btn {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.2rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.4rem;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  display: none;
+}
+
+.vintertrening .coach-tips.unlocked .close-btn {
+  display: block;
+}
+
+.vintertrening .coach-tips .close-btn:hover {
+  opacity: 1;
+  transform: rotate(90deg);
+}
+
+/* Låst tilstand */
+.vintertrening .coach-tips.locked {
+  background: rgba(60, 60, 60, 0.4);
+  color: #999;
+}
+
+.vintertrening .coach-tips.locked .tips-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+/* Ulåst tilstand */
+.vintertrening .coach-tips.unlocked {
+  background: rgba(0, 100, 200, 0.25);
+  color: #fff;
+  transition: all 0.6s ease;
+}
+
+.vintertrening .coach-tips.unlocked .tips-content {
+  max-height: 500px;
+  opacity: 1;
+  transition: all 0.6s ease;
+}
+
+/* Skjema for passord */
+.vintertrening .coach-tips .password-area {
+  padding: 1rem;
+}
+
+.vintertrening .coach-tips .password-area input {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.vintertrening .coach-tips .password-area button {
+  background-color: #69c3ff;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.vintertrening .coach-tips .password-area button:hover {
+  background-color: #fff;
+}
+
+.vintertrening .coach-tips .password-area #errorMsg {
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* --- Cooldown --- */
+.vintertrening .cooldown {
+  background: linear-gradient(135deg, rgba(0, 120, 255, 0.15), rgba(0, 0, 0, 0.5));
+  border: 1px solid rgba(0, 150, 255, 0.3);
+  box-shadow: 0 0 25px rgba(0, 180, 255, 0.25);
+}
+
+/* --- Smådetaljer --- */
+.vintertrening .tip {
+  font-style: italic;
+  color: #aad;
+  text-align: center;
+  margin-top: 0.8rem;
+}
+
+/* --- Responsivitet --- */
+@media (max-width: 700px) {
+  .vintertrening .header h1 {
+    font-size: 1.8rem;
+  }
+  .vintertrening .stations-grid {
+    grid-template-columns: 1fr;
+  }
+  .vintertrening .station {
+    max-width: 100%;
+  }
+}
+/* PATCHED BY CHATGPT: force vertical layout for denne underside (vintertrening) */
+
+/* Marker-klassen vi legger på <section> for å isolere layout */
+.mh-visual-force,
+.mh-visual-force * {
+  box-sizing: border-box;
+}
+
+/* Tving wrapper til kolonne og full bredde */
+.mh-visual-force {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 1.6rem !important;
+  width: 100% !important;
+}
+
+/* Sikre at hovedbokser fyller og sentreres */
+.mh-visual-force .box,
+.mh-visual-force .header,
+.mh-visual-force .warmup,
+.mh-visual-force .structure,
+.mh-visual-force .stations-grid,
+.mh-visual-force .coach-tips,
+.mh-visual-force .cooldown {
+  width: 100% !important;
+  max-width: 1100px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Tving stations-grid til å oppføre seg som en kolonne (hvis grid/flex fra parent tvinger rad) */
+.mh-visual-force .stations-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important; /* behold 2-kolonne på store skjermer */
+  gap: 2rem !important;
+}
+
+/* Hvis grid blir overridet til rad av noe annet, gjør fallback: */
+.mh-visual-force .stations-grid.mh-force-column,
+.mh-visual-force .stations-grid.force-column {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Hvert station: full bredde innen grid-celle */
+.mh-visual-force .station {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Coach-tips: sikre opplåsning-atferd ikke bryter layout */
+.mh-visual-force .coach-tips {
+  width: 100% !important;
+}
+
+/* Responsivt: på små skjermer, 1-kolonne grid */
+@media (max-width: 700px) {
+  .mh-visual-force .stations-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

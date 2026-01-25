@@ -1,0 +1,202 @@
+footer {
+  background: rgba(0, 0, 0, 0.9);
+  color: #ccc;
+  text-align: center;
+  padding: 20px 10px;
+  border-top: 0px solid #ffd42a;
+  box-shadow: 0 0px 0px rgba(255, 212, 42, 0.3);
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+footer nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+footer nav a {
+  color: #ffd42a;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+footer nav a:hover {
+  text-shadow: 0 0 5px rgba(255, 212, 42, 0.8);
+}
+#kontakt-modal label {
+  color: #eaf2ff;
+}
+
+#kontakt-modal input,
+#kontakt-modal textarea {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #eaf2ff;
+}
+
+#kontakt-modal textarea {
+  resize: vertical;
+}
+
+/* --- Blue Glow Modal Upgrade --- */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+  z-index: 9999;
+}
+
+.modal.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Modal box */
+.modal-content {
+  background: rgba(15, 20, 30, 0.92);
+  border: 2px solid #4cc9f0;
+  border-radius: 14px;
+  padding: 30px;
+  width: min(90%, 380px);
+  position: relative;
+
+  /* Base glow */
+  box-shadow:
+    0 0 20px rgba(76, 201, 240, 0.25),
+    0 0 40px rgba(76, 201, 240, 0.20);
+
+  animation: popin .25s ease;
+  text-align: center; /* Centers the content */
+}
+
+/* Hover glow intensifies */
+.modal-content:hover {
+  box-shadow:
+    0 0 28px rgba(76, 201, 240, 0.45),
+    0 0 55px rgba(76, 201, 240, 0.35),
+    0 0 75px rgba(76, 201, 240, 0.25);
+  transition: box-shadow .3s ease;
+}
+
+@keyframes popin {
+  from { transform: scale(.92); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.modal-content h2 {
+  color: #4cc9f0;
+  margin-bottom: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #4cc9f0;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.close-btn:hover {
+  text-shadow: 0 0 12px #4cc9f0;
+}
+
+/* Centered input layout */
+#kontakt-modal label {
+  color: #d7f3ff;
+  display: block;
+  margin: 10px 0 4px;
+  font-size: 14px;
+}
+
+#kontakt-modal input,
+#kontakt-modal textarea {
+  width: 90%;
+  margin: 0 auto;
+  display: block;
+
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(76,201,240,0.35);
+  border-radius: 8px;
+
+  padding: 10px;
+  color: #eafaff;
+  transition: 0.25s;
+}
+
+/* Glow around fields */
+#kontakt-modal input:focus,
+#kontakt-modal textarea:focus {
+  border-color: #4cc9f0;
+  box-shadow: 0 0 12px rgba(76, 201, 240, 0.45);
+  outline: none;
+}
+
+
+#kontakt-modal .send-btn,
+#kontakt-modal .cancel-btn {
+  position: relative;
+  overflow: hidden;
+  padding: 12px 0;
+  width: 130px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s ease;
+  z-index: 1;
+}
+
+/* SEND — blå neon */
+#kontakt-modal .send-btn {
+  background: #4cc9f0;
+  color: #032030;
+  box-shadow:
+    0 0 12px rgba(76,201,240,0.6),
+    0 0 25px rgba(76,201,240,0.4);
+}
+
+/* Hover glow */
+#kontakt-modal .send-btn:hover {
+  background: #66d6ff;
+  box-shadow:
+    0 0 20px rgba(76,201,240,0.9),
+    0 0 45px rgba(76,201,240,0.6),
+    0 0 70px rgba(76,201,240,0.4);
+}
+
+/* Cancel */
+#kontakt-modal .cancel-btn {
+  background: rgba(255,255,255,0.10);
+  color: #d7f3ff;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+#kontakt-modal .cancel-btn:hover {
+  background: rgba(255,255,255,0.18);
+  box-shadow:
+    0 0 12px rgba(200,220,255,0.4),
+    0 0 20px rgba(200,220,255,0.25);
+}

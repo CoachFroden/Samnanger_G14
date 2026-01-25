@@ -1,0 +1,37 @@
+<!-- === KONTAKT POPUP === -->
+<div id="contact-modal" class="contact-modal">
+  <div class="contact-box">
+    <!-- Lukkeknapp -->
+    <span class="close-btn">&times;</span>
+
+    <!-- Overskrift -->
+    <h2>Ta kontakt med oss</h2>
+    <p>Har du spørsmål om treninger, kamper eller spillerutvikling?  
+       Send oss en melding – vi svarer så snart vi kan ⚽️</p>
+
+    <!-- Skjema -->
+    <form id="contact-form" action="mailto:frode@vibliz.com" method="post" enctype="text/plain">
+      <div class="form-group">
+        <label for="name">Navn</label>
+        <input type="text" id="name" name="name" placeholder="Ditt navn" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-post</label>
+        <input type="email" id="email" name="email" placeholder="din@epost.no" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Telefonnummer</label>
+        <input type="tel" id="phone" name="phone" placeholder="f.eks. 999 99 999">
+      </div>
+
+      <div class="form-group">
+        <label for="message">Melding</label>
+        <textarea id="message" name="message" rows="5" placeholder="Skriv meldingen din her..." required></textarea>
+      </div>
+
+      <button type="submit" class="send-btn">Send melding</button>
+    </form>
+  </div>
+</div>

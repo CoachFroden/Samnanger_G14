@@ -1,0 +1,495 @@
+/* ============================================================
+   LAGET.CSS — Ryddet, optimalisert og uten duplikater
+   ============================================================ */
+
+:root {
+  --accent: #ffd42a;
+  --glow: rgba(34,160,255,0.14);
+}
+
+/* ============================================
+   PAGE LAYOUT
+   ============================================ */
+
+.laget {
+  background: #000;
+  color: #fff;
+  min-height: 100vh;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: system-ui, sans-serif;
+}
+
+.team-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.team-heading h1 {
+  font-size: 3rem;
+  margin: 10px 0;
+  color: var(--accent);
+  text-shadow: 0 0 12px rgba(255,212,42,0.6);
+}
+.team-heading h2 {
+  color: #9fd7ff;
+  margin-top: 20px;
+  font-size: 2rem;
+}
+
+/* ============================================
+   PLAYER GRID
+   ============================================ */
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: -20px;
+  width: 100%;
+  max-width: 1100px;
+}
+
+/* ============================================
+   PLAYER CARD
+   ============================================ */
+
+.player-card {
+  width: 170px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform .25s ease;
+  position: relative;
+    margin-left: 0px;    /* overlapper kortet før */
+  z-index: 1;
+
+}
+
+.player-card:hover {
+  transform: scale(1.07) translateY(-4px);
+}
+
+/* Gul glød for alle utespillere */
+.player-card .jersey {
+  width: 110%;
+  transform: translateY(-6px);
+  filter:
+    drop-shadow(0 0 22px rgba(241, 196, 15, 0.65))   /* gul glød */
+    drop-shadow(0 0 12px rgba(255,255,255,0.35));    /* hvit softglød */
+   transform: translateY(-6px);
+}
+
+/* Grønn glød for keepere */
+.player-card .jersey[src*="Theodor"],
+.player-card .jersey[src*="Thage"] {
+  filter:
+    drop-shadow(0 0 22px rgba(15, 47, 29, 0.65))      /* grønn glød */
+    drop-shadow(0 0 12px rgba(255,255,255,0.35));     /* hvit softglød */
+  transform: translateY(-6px);
+}
+
+
+/* ============================================
+   PASSWORD MODAL
+   ============================================ */
+
+#password-modal {
+      position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(4px);
+    z-index: 50000;
+}
+
+#password-modal.show {
+  display: flex !important;
+}
+.password-box {
+    width: 320px;
+    padding: 24px;
+    border-radius: 10px;
+    background: #0f1720;
+    color: #ccc;
+    text-align: center;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.05);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+/* Blå glød rundt modalboksen – identisk med Trenerhjørnet */
+.password-box {
+    box-shadow:
+        0 0 35px rgba(90, 150, 255, 0.35),
+        0 0 80px rgba(90, 150, 255, 0.18),
+        0 10px 40px rgba(0,0,0,0.6);
+}
+
+
+.password-box .close-btn {
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.password-box input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.07);
+  color: #fff;
+}
+
+/* Feilmelding */
+.error {
+    color: #ff4444;
+    width: 100%;
+    display: none;
+    margin-top: 6px;
+    margin-bottom: -6px;
+    font-size: 0.9rem;
+}
+
+.password-box .buttons {
+    display: flex !important;
+    gap: 10px !important;
+    width: 100% !important;
+    margin-top: 16px !important;
+}
+
+.password-box .btn {
+flex: 1 !important;
+    padding: 0 !important;
+    height: 48px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: 10px !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    box-sizing: border-box !important;
+    border: none !important;
+}
+
+.password-box .btn:hover {
+    transform: translateY(-3px);
+    background: #2a3b52 !important; /* samme som Trenerhjørnet */
+    border-color: rgba(150,190,255,0.9) !important;
+    box-shadow: 0 0 28px rgba(120,160,255,0.75) !important;
+}
+
+.password-box .btn.cancel {
+    background: #2e3842 !important;
+    color: white !important;
+}
+
+.password-box .btn.open {
+    background: #2a3b52 !important;
+    color: white !important;
+}
+
+/* ============================================================
+   PLAN MODAL — REN VERSJON
+   ============================================================ */
+
+.plan-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(6,10,18,0.65);
+  backdrop-filter: blur(6px);
+  padding: 28px;
+  z-index: 9000;
+}
+.plan-modal.show {
+  display: flex;
+}
+
+/* Panel */
+.plan-panel {
+  width: min(560px, 95%);
+  background: #0f1720;
+  color: #fff;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.75);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Close button */
+.plan-close {
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  background: none;
+  border: none;
+  color: #cbd5dd;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 3;
+}
+
+/* Header */
+.plan-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px;
+  background: linear-gradient(90deg,#0b1120,#020617);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.plan-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #1b2732;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plan-header img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.plan-titlewrap {
+  display: flex;
+  flex-direction: column;
+}
+.plan-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.plan-sub {
+  font-size: .85rem;
+  color: #a7b4c2;
+}
+
+/* Body */
+.plan-body {
+  padding: 16px 18px 20px;
+}
+
+/* Card */
+.plan-card {
+  background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.plan-card-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.plan-card-title {
+  font-weight: 700;
+  font-size: 1.3rem;               /* større tittel */
+  color: var(--accent) !important; /* gul */
+  margin-bottom: 12px;             /* mer luft under */
+  text-align: left;                /* beholder venstrestilt */
+}
+
+.plan-updated {
+  font-size: 0.75rem !important;  /* mindre */
+  color: #9fb0bd;
+  opacity: 0.75;                  /* litt svakere */
+  margin-top: 2px;                /* perfekt vertikal justering */
+}
+
+
+/* Sections */
+.plan-section + .plan-section {
+  margin-top: 22px;
+}
+
+.plan-section-title {
+  font-size: .75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  margin-bottom: 4px;
+  text-shadow: 0 0 6px rgba(255,255,255,0.12);
+  
+}
+
+.plan-section-list {
+  list-style: disc;
+  padding-left: 18px;
+  margin: 0;
+}
+.plan-section-list li {
+  margin: 2px 0;
+  font-size: .95rem;
+}
+
+/* Kommentar */
+.plan-comment-box {
+  margin-top: 4px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #0b1220;
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #e5edf7;
+}
+
+.plan-section {
+  padding-bottom: 8px;
+}
+
+/* Stats */
+.plan-stats {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+.plan-stats .stat {
+  flex: 1;
+  padding: 10px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 8px;
+  text-align: center;
+}
+.stat-num {
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+.stat-label {
+  font-size: .8rem;
+  color: #9fb0bd;
+}
+
+/* Close button inside panel */
+.plan-close-btn {
+  margin-top: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #1e293b;
+  border: none;
+  cursor: pointer;
+  color: #e5edf7;
+}
+
+/* Farger på tallene nederst */
+#stat-games {
+  color: #ff4444;   /* rød */
+}
+
+#stat-goals {
+  color: #ffd42a;   /* gul */
+}
+
+#stat-assists {
+  color: #4da3ff;   /* blå */
+}
+
+
+/* ============================================================
+   FARGE-KODING FOR PLAN-SEKSJONENE (MATCHER TRENERHJØRNET)
+   ============================================================ */
+
+/* 🔴 Tekniske mål */
+.plan-section.plan-tek .plan-section-title,
+.plan-section.plan-tek .plan-section-list li {
+  color: #ff4444;
+}
+
+/* 🟡 Taktiske mål */
+.plan-section.plan-tak .plan-section-title,
+.plan-section.plan-tak .plan-section-list li {
+  color: #ffd42a;
+}
+
+/* 🔵 Fysiske mål */
+.plan-section.plan-fys .plan-section-title,
+.plan-section.plan-fys .plan-section-list li {
+  color: #4da3ff;
+}
+
+.plan-section.plan-ov .plan-section-title,
+.plan-section.plan-ov .plan-section-list li {
+  color: #a57aff; /* lilla */
+}
+
+/* 🟢 Kommentar */
+.plan-section.plan-kom .plan-section-title,
+.plan-section.plan-kom .plan-comment-box {
+  color: #4dff4d;
+  border-color: #4dff4d;
+}
+
+.plan-modal.show {
+  pointer-events: all;
+}
+
+.plan-panel {
+  pointer-events: all;
+  position: relative;
+  z-index: 10;
+}
+.stat-num {
+  text-shadow: 0 0 10px rgba(255,255,255,0.1);
+  font-weight: 800;
+}
+.plan-panel {
+  background: linear-gradient(180deg, #101820, #0b121a);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+/* Feil passord fade-effekt */
+.pass.error {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+/* ============================================================
+   SKJULT SCROLLING FOR PLAN-MODAL
+   ============================================================ */
+
+.plan-panel {
+  max-height: 90vh;              /* modal får aldri høyere enn skjermen */
+  display: flex;
+  flex-direction: column;
+}
+
+.plan-body {
+  overflow-y: auto;              /* mulig å scrolle */
+  padding-right: 6px;            /* litt luft der scrollbar ellers er */
+}
+
+/* Skjul scrollbar – Chrome / Edge / Safari */
+.plan-body::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* Skjul scrollbar – Firefox */
+.plan-body {
+  scrollbar-width: none;
+}
+
+/* Skjul scrollbar – IE / gamle Edge */
+.plan-body {
+  -ms-overflow-style: none;
+}

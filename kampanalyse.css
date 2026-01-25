@@ -1,0 +1,13 @@
+section {
+  min-height: 70vh; /* eller 100vh hvis du vil helt midt på siden */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,11 @@
+# --- Aktiver korrekte MIME-typer for CSS og JS ---
+AddType text/css .css
+AddType application/javascript .js
+
+# --- Sørg for at .css og .js faktisk får lastes ---
+<FilesMatch "\.(css|js)$">
+  Require all granted
+</FilesMatch>
+
+# --- (valgfritt) tillat visning av mapper ---
+Options +Indexes

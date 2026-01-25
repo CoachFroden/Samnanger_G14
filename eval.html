@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Spillerevaluering — Admin</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#0b1116;
+    --bg-1:#0f1720;
+    --card:#0f1620;
+    --muted:#9fb0bd;
+    --accent-1:#f6c84a;
+    --accent-2:#4f6ef6;
+    --panel-border: rgba(255,255,255,0.03);
+    --input-bg:#091017;
+    --glass: rgba(255,255,255,0.03);
+    --primary-text:#e6eef6;
+    --radius:12px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(180deg,#061017 0%, #07141b 100%);
+    color:var(--primary-text);
+    padding:36px 20px;
+  }
+
+  .page {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .heading {
+    text-align:center;
+    margin-bottom:18px;
+  }
+  .heading h1 { margin:0; font-size:1.6rem; font-weight:800; letter-spacing:0.4px; }
+  .heading p { margin:6px 0 0 0; color:var(--muted); }
+
+  .card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));
+    border-radius:14px;
+    padding:18px;
+    border:1px solid var(--panel-border);
+    box-shadow: 0 10px 40px rgba(2,6,12,0.6);
+  }
+
+  /* select area */
+  .select-wrap { margin-bottom:14px; }
+  label.small { display:block; font-size:0.9rem; color:var(--muted); margin-bottom:8px; font-weight:600; }
+  select.player-select {
+    width:100%;
+    padding:12px 14px;
+    background:var(--input-bg);
+    color:var(--primary-text);
+    border-radius:10px;
+    border:1px solid rgba(246,200,74,0.12);
+    outline:none;
+    font-size:1rem;
+  }
+
+  .panel {
+    margin-top:12px;
+    padding:18px;
+    border-radius:10px;
+    background:linear-gradient(180deg, #0d1620, #0b1116);
+    border:1px solid var(--panel-border);
+  }
+
+  .panel h2 { margin:0 0 6px 0; font-size:1.05rem; color:var(--accent-1); display:flex; align-items:center; gap:10px; }
+  .panel .muted { color:var(--muted); font-size:0.95rem; margin-bottom:12px; }
+
+  .group { margin-top:10px; }
+  .group .group-title { font-weight:700; color:#dbe7ef; margin-bottom:8px; font-size:0.95rem; }
+  .goal-input { width:100%; padding:10px 12px; border-radius:8px; border:1px solid var(--glass); background:var(--input-bg); color:var(--primary-text); margin-bottom:10px; }
+
+  /* Kommentar */
+  .comment { width:100%; min-height:100px; padding:12px; border-radius:10px; border:1px solid var(--glass); background:var(--input-bg); color:var(--primary-text); }
+
+  /* update button */
+  .actions { margin-top:16px; display:flex; gap:12px; align-items:center; }
+  .btn-update {
+    flex:1;
+    padding:14px;
+    border-radius:10px;
+    border:0;
+    color:#06202a;
+    font-weight:700;
+    background: linear-gradient(90deg, var(--accent-1) 0%, #c6b14a 30%, #8f9cf3 70%, var(--accent-2) 100%);
+    box-shadow: 0 8px 30px rgba(79,110,246,0.12);
+    cursor:pointer;
+  }
+  .btn-ghost {
+    padding:12px 14px;
+    border-radius:10px;
+    background:transparent;
+    border:1px solid var(--panel-border);
+    color:var(--primary-text);
+  }
+
+  .tip {
+    margin-top:18px;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid rgba(68,98,168,0.18);
+    background: linear-gradient(180deg, rgba(68,98,168,0.04), rgba(68,98,168,0.02));
+    color:#cfe6f3;
+    font-size:0.95rem;
+  }
+
+  /* small helpers */
+  .row { display:flex; gap:12px; }
+  .col { flex:1; }
+  .small { max-width:160px; }
+  .muted-small { color:var(--muted); font-size:0.9rem; margin-top:6px; }
+
+  /* responsive */
+  @media (max-width:720px) {
+    .row { flex-direction:column; }
+    body { padding:18px 12px; }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="heading">
+      <h1>Spillerevaluering</h1>
+      <p>Skriv eller oppdater evalueringer for spillerne</p>
+    </div>
+
+    <div class="card">
+      <div class="select-wrap">
+        <label class="small">Velg spiller</label>
+        <select id="playerSelect" class="player-select"></select>
+      </div>
+
+      <div class="panel" id="evalPanel">
+        <h2>📈 Utviklingsplan <span id="panel-season" style="font-weight:700;margin-left:8px">2026</span> - <span id="panel-player" style="font-weight:700;margin-left:6px">Spiller</span></h2>
+        <div class="muted">Fyll inn mål for de ulike kategoriene</div>
+
+        <div class="group">
+          <div class="group-title">Tekniske mål</div>
+          <input class="goal-input" id="tech1" placeholder="teknisk mål 1" />
+          <input class="goal-input" id="tech2" placeholder="teknisk mål 2" />
+        </div>
+
+        <div class="group">
+          <div class="group-title">Taktiske mål</div>
+          <input class="goal-input" id="takt1" placeholder="taktisk mål 1" />
+          <input class="goal-input" id="takt2" placeholder="taktisk mål 2" />
+        </div>
+
+        <div class="group">
+          <div class="group-title">Fysiske mål</div>
+          <input class="goal-input" id="fys1" placeholder="fysisk mål 1" />
+          <input class="goal-input" id="fys2" placeholder="fysisk mål 2" />
+        </div>
+
+        <div class="group">
+          <div class="group-title">Kommentar</div>
+          <textarea id="comment" class="comment" placeholder="kommentar"></textarea>
+        </div>
+
+      </div>
+
+      <div class="actions">
+        <button id="saveBtn" class="btn-update">⟳ Oppdater spiller</button>
+      </div>
+
+      <div class="tip">
+        <strong>Tips:</strong> Evalueringene lagres automatisk i nettleseren og vil være synlig på hver spillers side etter at du har lagret.
+      </div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  // fallback spillere (brukes hvis window.lagetData ikke finnes)
+  const fallbackPlayers = [
+    "Theodor Vinje Våge","Thage Haukenes","Gabriel Bjørkmo","Sondre Bruvik Nordvik","William Langeland Jørgensen",
+    "Nicolai Lønnebakken Dalseid","Liam Moss Liøen","Torvald","Brage","Lars","Snorre","Ask Aldal"
+  ];
+
+  const playerSelect = document.getElementById('playerSelect');
+  const panelPlayer = document.getElementById('panel-player');
+  const panelSeason = document.getElementById('panel-season');
+
+  // felter
+  const fields = {
+    tech1: document.getElementById('tech1'),
+    tech2: document.getElementById('tech2'),
+    takt1: document.getElementById('takt1'),
+    takt2: document.getElementById('takt2'),
+    fys1: document.getElementById('fys1'),
+    fys2: document.getElementById('fys2'),
+    comment: document.getElementById('comment')
+  };
+
+  // last spillere fra window.lagetData hvis mulig
+  function getPlayersList() {
+    try {
+      if (window.lagetData && Array.isArray(window.lagetData.spillere)) {
+        return window.lagetData.spillere.map(p => p.navn);
+      }
+    } catch (e) { /* ignore */ }
+    return fallbackPlayers;
+  }
+
+  function populateSelect() {
+    const players = getPlayersList();
+    playerSelect.innerHTML = '';
+    players.forEach(name => {
+      const opt = document.createElement('option');
+      opt.value = name;
+      opt.textContent = name;
+      playerSelect.appendChild(opt);
+    });
+  }
+
+  function loadLocalPlans() {
+    try {
+      return JSON.parse(localStorage.getItem('lagetPlans') || '{}');
+    } catch (e) { return {}; }
+  }
+
+  function saveLocalPlans(obj) {
+    localStorage.setItem('lagetPlans', JSON.stringify(obj));
+    // also update global so main page can read it without reload
+    window.lagetPlans = Object.assign({}, window.lagetPlans || {}, obj);
+  }
+
+  function fillFormFromPlan(plan) {
+    if (!plan) {
+      fields.tech1.value = '';
+      fields.tech2.value = '';
+      fields.takt1.value = '';
+      fields.takt2.value = '';
+      fields.fys1.value = '';
+      fields.fys2.value = '';
+      fields.comment.value = '';
+      panelSeason.textContent = new Date().getFullYear();
+      return;
+    }
+    fields.tech1.value = plan.tech && plan.tech[0] ? plan.tech[0] : '';
+    fields.tech2.value = plan.tech && plan.tech[1] ? plan.tech[1] : '';
+    fields.takt1.value = plan.takt && plan.takt[0] ? plan.takt[0] : '';
+    fields.takt2.value = plan.takt && plan.takt[1] ? plan.takt[1] : '';
+    fields.fys1.value = plan.fys && plan.fys[0] ? plan.fys[0] : '';
+    fields.fys2.value = plan.fys && plan.fys[1] ? plan.fys[1] : '';
+    fields.comment.value = plan.comment || '';
+    panelSeason.textContent = plan.season || new Date().getFullYear();
+  }
+
+  // init
+  populateSelect();
+
+  // hvis URL har ?player=Name forhåndsvelg
+  (function preselect(){
+    const params = new URLSearchParams(location.search);
+    const p = params.get('player');
+    if (p) {
+      const exists = Array.from(playerSelect.options).some(o => o.value === p);
+      if (exists) playerSelect.value = p;
+    }
+    // load existing plan if present
+    const plans = loadLocalPlans();
+    const cur = playerSelect.value;
+    panelPlayer.textContent = cur;
+    if (plans && plans[cur]) fillFormFromPlan(plans[cur]);
+  })();
+
+  playerSelect.addEventListener('change', () => {
+    const name = playerSelect.value;
+    panelPlayer.textContent = name;
+    const plans = loadLocalPlans();
+    if (plans && plans[name]) {
+      fillFormFromPlan(plans[name]);
+    } else {
+      fillFormFromPlan(null);
+    }
+  });
+
+  // save handler
+  document.getElementById('saveBtn').addEventListener('click', () => {
+    const name = playerSelect.value;
+    if (!name) return alert('Velg spiller');
+
+    const plan = {
+      season: panelSeason.textContent || new Date().getFullYear(),
+      updated: new Date().toLocaleDateString(),
+      summary: '', // kan later settes fra andre felt
+      tech: [fields.tech1.value.trim(), fields.tech2.value.trim()].filter(Boolean),
+      takt: [fields.takt1.value.trim(), fields.takt2.value.trim()].filter(Boolean),
+      fys: [fields.fys1.value.trim(), fields.fys2.value.trim()].filter(Boolean),
+      comment: fields.comment.value.trim(),
+      matches: 0,
+      goals: 0,
+      assists: 0,
+      goalsList: [],
+      skills: []
+    };
+
+    // read existing plans, set and save
+    const plans = loadLocalPlans();
+    plans[name] = plan;
+    saveLocalPlans(plans);
+
+    // notify user
+    const old = document.getElementById('saveBtn');
+    old.textContent = '✔ Lagret';
+    setTimeout(()=> old.textContent = '⟳ Oppdater spiller', 1200);
+
+    // if openPlanModal exists (index/main.js loaded in same window), update
+    if (typeof window.openPlanModal === 'function') {
+      // pass the plan object so the modal shows filled version immediately
+      setTimeout(()=> window.openPlanModal(name, plan), 300);
+    }
+  });
+
+})();
+</script>
+</body>
+</html>

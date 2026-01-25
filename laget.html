@@ -1,0 +1,81 @@
+
+<section class="laget">
+  <div class="team-heading">
+    <h1>Samnanger G14</h1>
+    <h2>Spillerstall 2025/2026</h2>
+  </div>
+
+  <div id="spillereContainer" class="team-grid">
+    <!-- Spillere rendres dynamisk av laget.js -->
+  </div>
+</section>
+
+<!-- PASSWORD MODAL – identisk som bildet -->
+<div id="password-modal" class="password-modal" aria-hidden="true">
+  <div class="password-box">
+    <button class="close-btn" onclick="closePasswordModal()">&times;</button>
+
+    <div class="icon">🔒</div>
+
+    <h2>Passord påkrevd</h2>
+    <p>Skriv inn passordet for å se utviklingsplanen</p>
+
+    <input id="password-modal-input" type="password" placeholder="Skriv inn passord">
+
+    <div id="password-error" class="error">Feil passord. Prøv igjen.</div>
+
+    <div class="buttons">
+      <button class="btn cancel" onclick="closePasswordModal()">Avbryt</button>
+      <button class="btn open" id="player-password-confirm">Åpne</button>
+    </div>
+  </div>
+</div>
+
+<!-- PLAN MODAL — design identisk med bildet -->
+<div id="plan-modal" class="plan-modal" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="plan-panel" role="document">
+    <button class="plan-close" aria-label="Lukk" onclick="closePlanModal()">✕</button>
+
+    <header class="plan-header">
+      <div class="plan-avatar">
+        <img id="plan-avatar-img" src="" alt="" onerror="this.style.display='none'">
+        <div id="plan-avatar-fallback" class="avatar-fallback" aria-hidden="true">👤</div>
+      </div>
+      <div class="plan-titlewrap">
+        <div class="plan-name" id="plan-player-name">Navn</div>
+        <div class="plan-sub" id="plan-player-sub">#1 • Keeper</div>
+      </div>
+    </header>
+
+    <div class="plan-body">
+      <div class="plan-card">
+        <div class="plan-card-top">
+          <div class="plan-card-title">Utviklingsplan 2026</div>
+          <div class="plan-updated" id="plan-updated">Oppdatert: —</div>
+        </div>
+        <div class="plan-card-content" id="plan-content">
+          Ingen utviklingsplan er lagt til ennå.
+        </div>
+      </div>
+
+      <div class="plan-stats">
+        <div class="stat">
+          <div class="stat-num" id="stat-games">0</div>
+          <div class="stat-label">Kamper</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" id="stat-goals">0</div>
+          <div class="stat-label">Mål</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" id="stat-assists">0</div>
+          <div class="stat-label">Assist</div>
+        </div>
+      </div>
+
+      <div style="margin-top:14px; text-align:center;">
+        <button class="plan-close-btn" onclick="closePlanModal()">Lukk</button>
+      </div>
+    </div>
+  </div>
+</div>
