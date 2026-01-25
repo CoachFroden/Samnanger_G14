@@ -13,7 +13,7 @@ window.lagetData.posisjoner = ["Keeper", "Forsvar", "Midtbane", "Angrep"];
 
 
 window.lagetData.spillere = [
-  { nr: 1, navn: "Theodor Vinje Våge", rolle: "Keeper", image: "drakter/Theodor.png" },
+  { nr: 1, navn: "Theodor Vinje Våge", rolle: "Keeper", image: "Theodor.png" },
   { nr: 12, navn: "Thage Haukenes", rolle: "Keeper", image: "drakter/Thage.png" },
   { nr: 2, navn: "Gabriel Bjørkmo", rolle: "Forsvar", image: "drakter/Gabriel.png" },
   { nr: 3, navn: "Sondre Bruvik Nordvik", rolle: "Forsvar", image: "drakter/Sondre.png" },
@@ -287,3 +287,4 @@ function connectCloseButtons() {
 }
 
 setTimeout(connectCloseButtons, 100);
+
