@@ -1,59 +1,78 @@
-<!DOCTYPE html>
-<html lang="no">
-<head>
-  <meta charset="UTF-8">
-  <title>Kampanalyse</title>
-  <link rel="stylesheet" href="../css/style.css">
-</head>
+<div class="kampanalyse-wrapper">
 
-<body>
-  <main class="container">
+  <div class="kampanalyse-header">
     <h1>Kampanalyse</h1>
+    <p>Refleksjon og utviklingspunkter etter kamp</p>
+  </div>
 
-    <form id="kampanalyseForm">
-      <label>Dato</label>
-      <input type="date" id="dato" required>
+  <form class="kampanalyse-form">
 
-      <label>Motstander</label>
-      <input type="text" id="motstander" required>
+    <div class="ka-row">
+      <div class="ka-field">
+        <label>Dato</label>
+        <input type="date" id="ka-dato">
+      </div>
 
-      <label>Type kamp</label>
-      <select id="type">
-        <option>Seriekamp</option>
-        <option>Treningskamp</option>
-        <option>Turnering</option>
-      </select>
+      <div class="ka-field">
+        <label>Motstander</label>
+        <input type="text" id="ka-motstander" placeholder="F.eks. Os Turn G14">
+      </div>
 
+      <div class="ka-field">
+        <label>Type kamp</label>
+        <select id="ka-type">
+          <option>Seriekamp</option>
+          <option>Treningskamp</option>
+          <option>Turnering</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="ka-field">
       <label>Hva fungerte bra</label>
-      <textarea id="fungerteBra"></textarea>
+      <textarea id="ka-bra"></textarea>
+    </div>
 
+    <div class="ka-field">
       <label>Hva vi skal jobbe videre med</label>
-      <textarea id="jobbeVidere"></textarea>
+      <textarea id="ka-jobbe"></textarea>
+    </div>
 
-      <label>Angrep</label>
-      <textarea id="angrep"></textarea>
+    <div class="ka-grid-3">
+      <div class="ka-field">
+        <label>Angrep</label>
+        <textarea id="ka-angrep"></textarea>
+      </div>
+      <div class="ka-field">
+        <label>Forsvar</label>
+        <textarea id="ka-forsvar"></textarea>
+      </div>
+      <div class="ka-field">
+        <label>Overganger</label>
+        <textarea id="ka-overganger"></textarea>
+      </div>
+    </div>
 
-      <label>Forsvar</label>
-      <textarea id="forsvar"></textarea>
-
-      <label>Overganger</label>
-      <textarea id="overganger"></textarea>
-
+    <div class="ka-field">
       <label>Fokus videre</label>
-      <textarea id="fokusVidere"></textarea>
+      <textarea id="ka-fokus"></textarea>
+    </div>
 
+    <div class="ka-field">
       <label>Generell refleksjon</label>
-      <textarea id="refleksjon"></textarea>
+      <textarea id="ka-refleksjon"></textarea>
+    </div>
 
-      <button type="submit">Lagre kampanalyse</button>
-    </form>
+    <button id="ka-lagre" class="ka-save" type="button">
+      Lagre kampanalyse
+    </button>
 
-    <section id="historikk">
-      <h2>Tidligere analyser</h2>
-      <ul id="analyseListe"></ul>
-    </section>
-  </main>
+  </form>
 
-  <script type="module" src="kampanalyse.js"></script>
-</body>
-</html>
+  <h2 class="ka-history-title">Tidligere analyser</h2>
+  <ul id="ka-historikk"></ul>
+
+</div>
+
+<!-- JS for kampanalyse -->
+<script type="module" src="kampanalyse/kampanalyse.js"></script>
