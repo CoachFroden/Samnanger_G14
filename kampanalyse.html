@@ -63,16 +63,70 @@
       <textarea id="ka-refleksjon"></textarea>
     </div>
 
-    <button id="ka-lagre" class="ka-save" type="button">
-      Lagre kampanalyse
-    </button>
+<div class="ka-actions">
+  <button id="ka-lagre" class="ka-save" type="submit">
+    Lagre kampanalyse
+  </button>
 
-  </form>
-
-  <h2 class="ka-history-title">Tidligere analyser</h2>
-  <ul id="ka-historikk"></ul>
-
+  <button id="ka-open-modal" class="ka-history-toggle" type="button">
+    Tidligere kampanalyser
+  </button>
 </div>
 
-<!-- JS for kampanalyse -->
-<script type="module" src="kampanalyse/kampanalyse.js"></script>
+
+  </form>
+</div>
+
+
+<div id="ka-modal" class="ka-modal hidden">
+  <div class="ka-modal-content">
+    <button id="ka-close-modal" class="ka-modal-close">×</button>
+    <h2>Tidligere kampanalyser</h2>
+    <ul id="ka-historikk"></ul>
+  </div>
+</div>
+
+<!-- MODAL: FULL KAMPANALYSE -->
+<div id="ka-detail-modal" class="ka-modal hidden">
+  <div class="ka-modal-content">
+    <button id="ka-detail-close" class="ka-modal-close">×</button>
+
+    <h2 id="ka-detail-title"></h2>
+    <p id="ka-detail-type"></p>
+
+    <div class="ka-detail-section">
+      <h3>Hva fungerte bra</h3>
+      <p id="ka-detail-bra"></p>
+    </div>
+
+    <div class="ka-detail-section">
+      <h3>Hva vi skal jobbe videre med</h3>
+      <p id="ka-detail-jobbe"></p>
+    </div>
+
+    <div class="ka-detail-section">
+      <h3>Angrep</h3>
+      <p id="ka-detail-angrep"></p>
+    </div>
+
+    <div class="ka-detail-section">
+      <h3>Forsvar</h3>
+      <p id="ka-detail-forsvar"></p>
+    </div>
+
+    <div class="ka-detail-section">
+      <h3>Overganger</h3>
+      <p id="ka-detail-overganger"></p>
+    </div>
+
+    <div class="ka-detail-section">
+      <h3>Fokus videre</h3>
+      <p id="ka-detail-fokus"></p>
+    </div>
+
+    <div class="ka-detail-section">
+      <h3>Refleksjon</h3>
+      <p id="ka-detail-refleksjon"></p>
+    </div>
+  </div>
+</div>

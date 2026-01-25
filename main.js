@@ -111,11 +111,15 @@ async function loadPageScript(src) {
       return;
     }
 
-    // returner promise som fullføres når scriptet er ferdig kjørt
     return new Promise((resolve, reject) => {
       const script = document.createElement("script");
       script.src = src;
       script.dataset.pageScript = "true";
+
+      // 🔑 VIKTIG: kampanalyse.js må være module
+      if (src === "kampanalyse.js") {
+        script.type = "module";
+      }
 
       script.onload = () => {
         console.log(`✅ Lastet ${src}`);
