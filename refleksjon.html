@@ -1,0 +1,81 @@
+<div class="ref-container" role="region" aria-label="Refleksjon (trener)">
+<div class="ref-header">
+  <!-- VENSTRE: tittel -->
+  <div class="ref-header-left">
+    <h1 class="title-with-status">
+  Refleksjon
+  <span id="authIndicator" class="auth-indicator"></span>
+</h1>
+    <p class="ref-sub">Les spillernes ukerefleksjoner (kun for trener).</p>
+  </div>
+
+  <!-- HØYRE: godkjenning -->
+  <div class="ref-header-right">
+    <button id="approvalToggle" class="ref-approval-btn" type="button">
+      Ventende godkjenninger (0) ▾
+    </button>
+
+    <div id="approvalDropdown" class="ref-approval-dropdown" hidden>
+      <div class="ref-approval-empty">
+        Ingen ventende godkjenninger
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Innhold som er låst til passord er bekreftet -->
+  <section id="refContent" class="ref-card" hidden>
+    <div class="ref-toolbar">
+      <div class="ref-field">
+        <label for="refPlayerSelect">Spiller</label>
+        <select id="refPlayerSelect">
+          <option value="" selected>Velg spiller</option>
+        </select>
+      </div>
+
+      <div class="ref-field">
+        <label for="refWeekSelect">Uke</label>
+        <select id="refWeekSelect">
+          <option value="" selected>Alle</option>
+        </select>
+      </div>
+
+      <div class="ref-actions">
+        <button id="refRefreshBtn" class="ref-btn secondary" type="button">Oppdater</button>
+        <button id="refLockBtn" class="ref-btn danger" type="button">Lås</button>
+      </div>
+    </div>
+
+    <div class="ref-divider"></div>
+
+    <div id="refList" class="ref-list">
+      <div class="ref-empty">
+        Velg en spiller for å se refleksjoner.
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- PASSORDMODAL -->
+<div id="refPwModal" class="pw-modal" aria-hidden="true">
+  <div class="pw-box" role="dialog" aria-modal="true" aria-labelledby="refPwTitle">
+    <button class="pw-close" type="button" id="refPwClose">×</button>
+
+    <div class="pw-icon">🔒</div>
+
+    <h2 class="pw-title" id="refPwTitle">Passord påkrevd</h2>
+    <p class="pw-sub">Skriv inn passordet for å åpne refleksjonene</p>
+
+    <input type="password" id="refPwInput" placeholder="Skriv inn passord" autocomplete="current-password" />
+
+    <p id="refPwError" class="pw-error">Feil passord</p>
+
+    <div class="pw-buttons">
+      <button class="pw-btn cancel" id="refPwCancel" type="button">Avbryt</button>
+      <button class="pw-btn confirm" id="refPwOk" type="button">Åpne</button>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="refleksjon.css">
+
