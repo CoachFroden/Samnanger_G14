@@ -1,10 +1,40 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+  addDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* =========================
+   FIREBASE INIT (EGEN APP)
+========================= */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAKZMu2HZPmmoZ1fFT7DNA9Q6ystbKEPgE",
+  authDomain: "samnanger-g14-f10a1.firebaseapp.com",
+  projectId: "samnanger-g14-f10a1",
+  storageBucket: "samnanger-g14-f10a1.firebasestorage.app",
+  messagingSenderId: "926427862844",
+  appId: "1:926427862844:web:5e6d11bb689c802d01b039"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
 /* =========================
    LAGRE KAMPANALYSE
 ========================= */
 
 const lagreBtn = document.getElementById("ka-lagre");
 
-lagreBtn.addEventListener("click", async () => {
+lagreBtn.addEventListener("click", async (e) => {
+  e.preventDefault(); // ⛔ stopper form-submit
+
   const dato = document.getElementById("ka-dato").value;
   const motstander = document.getElementById("ka-motstander").value.trim();
 
@@ -33,10 +63,11 @@ lagreBtn.addEventListener("click", async () => {
   };
 
   try {
-    await window.firestore.setDoc(
-      window.firestore.doc(window.db, "kampanalyser", docId),
-      obj
-    );
+    await setDoc(
+  doc(db, "kampanalyser", docId),
+  obj
+);
+
 
     alert("Kampanalyse lagret i Firebase!");
     hentKampanalyser(); // 🔄 oppdater visningen
@@ -62,9 +93,10 @@ async function hentKampanalyser() {
   liste.innerHTML = "<li>Laster kampanalyser…</li>";
 
   try {
-    const snapshot = await window.firestore.getDocs(
-      window.firestore.collection(window.db, "kampanalyser")
-    );
+   const snapshot = await getDocs(
+  collection(db, "kampanalyser")
+);
+
 
     if (snapshot.empty) {
       liste.innerHTML = "<li>Ingen kampanalyser lagret ennå.</li>";
@@ -88,9 +120,11 @@ async function hentKampanalyser() {
       `;
 
       // Klar for modal / redigering senere
-      li.addEventListener("click", () => {
-  åpneDetaljModal(data);
+li.addEventListener("click", () => {
+  modal.classList.add("hidden");   // 👈 LUKK historikk
+  åpneDetaljModal(data);           // 👈 ÅPNE detalj
 });
+
 
       liste.appendChild(li);
     });
@@ -149,8 +183,12 @@ detailModal.addEventListener("click", (e) => {
   }
 });
 function åpneDetaljModal(data) {
-  document.getElementById("ka-detail-title").textContent =
-    `${data.dato} – ${data.motstander}`;
+
+  document.getElementById("ka-detail-matchup").textContent =
+    `Samnanger – ${data.motstander}`;
+
+  document.getElementById("ka-detail-date").textContent =
+    data.dato;
 
   document.getElementById("ka-detail-type").textContent =
     data.type || "";
@@ -178,3 +216,8 @@ function åpneDetaljModal(data) {
 
   detailModal.classList.remove("hidden");
 }
+const printBtn = document.getElementById("ka-print");
+
+printBtn.addEventListener("click", () => {
+  window.print();
+});
