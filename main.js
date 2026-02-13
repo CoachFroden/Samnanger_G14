@@ -1,3 +1,5 @@
+
+
 console.log("✅ main.js lastet!");
 
 // Når alt er klart, last header + forside + footer
@@ -71,6 +73,7 @@ async function loadPage(page) {
 
 if (page === "laget") {
     await loadPageScript("laget.js");
+	
 
     // Nå er HTML lastet og scriptet lastet → kjør builder
     if (typeof buildPlayerCards === "function") {
@@ -80,8 +83,17 @@ if (page === "laget") {
 } else {
     // Last js-fil for andre sider
     await loadPageScript(`${page}.js`);
+	
+	// 🔁 Re-init refleksjon når siden lastes via meny
+if (page === "refleksjon" && typeof window.initRefleksjonPage === "function") {
+  window.initRefleksjonPage();
 }
 
+}
+// ▶️ Kjør init-funksjon hvis siden har en
+if (page === "statistikk-public" && typeof window.initStatistikkPublicPage === "function") {
+  window.initStatistikkPublicPage();
+}
 
 
 // ⭐ Kjør sidens init-funksjoner
@@ -101,6 +113,7 @@ if (page === "forside" && window.initForsidePage) {
 // Scriptet kjører først når DOM er ferdig oppdatert
 // ============================================================
 async function loadPageScript(src) {
+	
   // fjern gamle scripts
   document.querySelectorAll("script[data-page-script]").forEach(s => s.remove());
 
@@ -116,10 +129,14 @@ async function loadPageScript(src) {
       script.src = src;
       script.dataset.pageScript = "true";
 
-      // 🔑 VIKTIG: kampanalyse.js må være module
-      if (src === "kampanalyse.js") {
-        script.type = "module";
-      }
+if (
+  src === "kampanalyse.js" ||
+  src === "statistikk-public.js" ||
+  src === "refleksjon.js"
+) {
+  script.type = "module";
+}
+
 
       script.onload = () => {
         console.log(`✅ Lastet ${src}`);
@@ -138,6 +155,7 @@ async function loadPageScript(src) {
     console.log(`⚠️ Kunne ikke laste ${src}`);
   }
 }
+
 
 // ============================================================
 // MARKER AKTIV KNAPP (uten å matche feil knapper)

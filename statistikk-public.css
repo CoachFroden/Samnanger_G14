@@ -1,0 +1,221 @@
+/* =====================================================
+   STATISTIKK – SCOPED CSS (SPA-SIKKER)
+   Gjelder KUN innhold inni .statistikk-page
+   ===================================================== */
+
+.statistikk-page {
+	max-width: 1100px;
+	margin: 0 auto;
+  font-family: system-ui, sans-serif;
+  color: #e5e7eb;
+  padding: 2rem;
+}
+
+/* -----------------------------------------------------
+   Overskrifter
+----------------------------------------------------- */
+
+.statistikk-page h1,
+.statistikk-page h2 {
+  margin-bottom: 0.6rem;
+}
+
+/* -----------------------------------------------------
+   Seksjoner
+----------------------------------------------------- */
+
+.statistikk-page section {
+  margin-bottom: 2.5rem;
+}
+
+/* -----------------------------------------------------
+   Tabeller
+----------------------------------------------------- */
+
+.statistikk-page table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.statistikk-page th,
+.statistikk-page td {
+  padding: 0.6rem;
+  border-bottom: 1px solid #334155;
+  text-align: left;
+}
+
+.statistikk-page th {
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+/* -----------------------------------------------------
+   Kontroller (Totalt / Kampvalg / Print)
+----------------------------------------------------- */
+
+.statistikk-page .stats-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.2rem;
+}
+
+/* Felles stil for knapper */
+.statistikk-page .stats-controls button {
+  background: #1e293b;
+  color: #e5e7eb;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.statistikk-page .stats-controls button:hover {
+  background: #334155;
+  border-color: #475569;
+}
+
+/* Total-knapp (primær) */
+.statistikk-page #totalBtn {
+  background: transparent;
+  border-color: #38bdf8;
+  color: #38bdf8;
+}
+
+.statistikk-page #totalBtn:hover {
+  background: rgba(56,189,248,0.12);
+}
+
+/* Dropdown */
+.statistikk-page .stats-controls select {
+  background: transparent;
+  color: #e5e7eb;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 0.45rem 0.7rem;
+  font-size: 0.9rem;
+}
+
+/* Print-knapp */
+.statistikk-page #printBtn {
+  margin-left: auto;
+  background: #052e16;
+  border-color: #22c55e;
+  color: #22c55e;
+}
+
+.statistikk-page #printBtn:hover {
+  background: rgba(34,197,94,0.15);
+}
+
+/* -----------------------------------------------------
+   Print-spesifikt
+----------------------------------------------------- */
+
+/* Skjult på skjerm */
+.statistikk-page .print-only {
+  display: none;
+}
+
+@media print {
+
+  .statistikk-page {
+    background: white;
+    color: black;
+    padding: 0;
+  }
+
+  .statistikk-page .stats-controls {
+    display: none !important;
+  }
+
+  .statistikk-page table {
+    color: black;
+  }
+
+  .statistikk-page th {
+    color: black;
+  }
+
+  /* Vis print-tittel */
+  .statistikk-page .print-only {
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  /* Skjul kamp-tabell i print */
+  .statistikk-page #matchesTable,
+  .statistikk-page h2:has(+ #matchesTable) {
+    display: none !important;
+  }
+}
+
+/* -----------------------------------------------------
+   OFFENTLIG VISNING – skjul minutter
+----------------------------------------------------- */
+
+.statistikk-page.hide-minutes th:nth-child(3),
+.statistikk-page.hide-minutes td:nth-child(3) {
+  display: none;
+}
+/* Dropdown – dark mode */
+#matchSelect {
+  background-color: #0b1220;
+  color: #e5f0ff;
+  border: 1px solid #1f3a5f;
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+
+/* Options i dropdown */
+#matchSelect option {
+  background-color: #0b1220;
+  color: #e5f0ff;
+}
+
+/* Hover / valgt option (Chrome/Edge) */
+#matchSelect option:checked,
+#matchSelect option:hover {
+  background-color: #1f3a5f;
+  color: #ffffff;
+}
+#matchSelect {
+  min-width: 220px;
+  font-weight: 500;
+}
+
+#matchSelect:focus {
+  outline: none;
+  border-color: #4da3ff;
+  box-shadow: 0 0 0 2px rgba(77, 163, 255, 0.25);
+}
+@media print {
+  /* Skjul ALT som default */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Vis kun print-området */
+  #printArea,
+  #printArea * {
+    visibility: visible;
+  }
+
+  /* Plasser print-området øverst */
+  #printArea {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  /* Fjern mørk bakgrunn */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}

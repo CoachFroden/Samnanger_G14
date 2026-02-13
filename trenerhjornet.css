@@ -125,7 +125,7 @@ body {
 
   /* ✅ Ikke klipp dropdown */
   max-height: 90vh;
-  overflow: visible;
+  overflow: hidden;
 
   /* ✅ La innholdet styre scroll (se eval-box under) */
   display: flex;
@@ -223,7 +223,11 @@ body {
 .eval-box {
   overflow-y: auto;
   flex: 1;
-  padding-right: 6px; /* litt luft der scrollbar ellers er */
+  padding-right: 16px; /* litt luft der scrollbar ellers er */
+  padding-left: 2px;
+  min-height: 0;
+  transition: opacity 0.25s ease;
+  will-change: opacity;
 }
 
 /* Skjul scrollbar (valgfritt) */
@@ -806,4 +810,189 @@ button:active {
         padding: 10px !important;
         align-items: center !important;
     }
+}
+.eval-box {
+  opacity: 1;
+}
+.eval-box {
+  min-height: 420px;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.25s ease,
+    visibility 0s linear 0.25s;
+}
+
+/* Skjult tilstand */
+.eval-box.is-hiding {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.25s ease,
+    visibility 0s linear 0.25s;
+}
+
+/* Synlig igjen */
+.eval-box.is-showing {
+  visibility: visible;
+  opacity: 1;
+  transition:
+    opacity 0.25s ease;
+}
+.player-toggle {
+  width: 100%;
+  padding: 12px;
+  background: #111b27;
+  color: white;
+  border-radius: 10px;
+  border: 1px solid #2a3b4f;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.player-list {
+  display: none;
+  margin-top: 8px;
+  list-style: none;
+  padding: 6px 0;
+  border-radius: 10px;
+  background: #0f1720;
+  border: 1px solid #2a3b4f;
+  max-height: 260px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.player-list.show {
+  display: block;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+
+.player-list li {
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+.player-list li:hover {
+  background: #2a3b52;
+}
+.player-picker {
+  position: relative;
+}
+
+.player-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+
+  display: none;
+  margin-top: 6px;
+}
+/* ============================================================
+   FINAL FIX – EVALUERINGSMODAL LAYOUT
+   (overstyrer alle tidligere regler)
+   ============================================================ */
+
+.eval-modal-panel {
+  max-height: 90vh !important;
+  overflow: hidden !important;
+  box-sizing: border-box;
+}
+
+.eval-box {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+
+  padding-right: 20px !important;
+  padding-left: 4px !important;
+  box-sizing: border-box;
+}
+
+/* Sørg for at inputs aldri kuttes */
+.eval-box input,
+.eval-box textarea {
+  box-sizing: border-box;
+}
+/* ============================================================
+   ULTRA LIGHT MODE – UTVIKLINGSPLAN
+   Fokus: luft, ro, mindre bokser
+   ============================================================ */
+
+/* Tittel roligere */
+.eval-title {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 4px !important;
+}
+
+/* Undertittel mer diskret */
+.eval-sub {
+  font-size: 0.8rem !important;
+  opacity: 0.75;
+  margin-bottom: 18px !important;
+}
+
+/* Seksjonsoverskrifter – lettere, mer luft */
+.eval-h3 {
+  font-size: 0.9rem !important;
+  font-weight: 600;
+  margin-top: 22px !important;
+  margin-bottom: 6px !important;
+  letter-spacing: 0.02em;
+}
+
+/* FJERN “tunge bokser”-følelse */
+.eval-box input,
+.eval-box textarea,
+#eval-player-select {
+  background: rgba(255,255,255,0.03) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  font-size: 0.9rem !important;
+  padding: 8px 10px !important;
+  border-radius: 8px !important;
+}
+
+/* Mer luft mellom feltene */
+.eval-box input,
+.eval-box textarea {
+  margin-bottom: 14px !important;
+}
+
+/* Øvelse-feltene tydelig lettere */
+#ovel-tek,
+#ovel-tak,
+#ovel-fys {
+  background: rgba(255,255,255,0.02) !important;
+  border-style: dashed !important;
+  opacity: 0.75;
+}
+
+/* Kommentar – mer “notat”, mindre “skjema” */
+.eval-box textarea {
+  min-height: 90px !important;
+  font-size: 0.9rem !important;
+  line-height: 1.4;
+}
+
+/* Knappen mindre dominerende */
+.eval-submit {
+  font-size: 0.95rem !important;
+  padding: 10px !important;
+  margin-top: 18px !important;
+  opacity: 0.9;
+}
+/* FIX: lesbar dropdown for spillervalg */
+#eval-player-select option {
+  background-color: #0f1720;
+  color: #e5f1ff;
 }

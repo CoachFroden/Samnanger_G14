@@ -6,13 +6,38 @@
   "use strict";
 
 async function fetchPlayers() {
-  const colRef = window.firestore.collection(window.db, "spillere");
-  const snap = await window.firestore.getDocs(colRef);
+const colRef = window.firestoreCollection(
+  window.firestore,
+  "spillere"
+);
 
-  return snap.docs.map(d => ({
-    id: d.id,
-    navn: d.data().navn
-  }));
+const snap = await window.firestoreGetDocs(colRef);
+
+  const players = [];
+
+  let i = 0;
+  for (const d of snap.docs) {
+    console.log("Tester dokument", i, "id:", d.id, "raw:", d.data());
+
+    // TVING alt til string før bruk
+    const rawData = d.data();
+    const navn = rawData && rawData.navn;
+
+    if (typeof navn !== "string") {
+      console.warn("STOPPER – ugyldig navn-felt", d.id, rawData);
+      continue;
+    }
+
+    players.push({
+      id: String(d.id),
+      navn: String(navn)
+    });
+
+    i++;
+  }
+
+  console.log("fetchPlayers ferdig, antall:", players.length);
+  return players;
 }
 
   // =============================================================
@@ -115,18 +140,14 @@ sel.appendChild(placeholder);
 
 fetchPlayers().then(players => {
   players.forEach(p => {
-    const op = document.createElement("option");
-    op.value = p.id || p.navn;
-    op.textContent = p.navn;
-    sel.appendChild(op);
-  });
+  const op = document.createElement("option");
+  op.value = p.id;        // doc.id = spillernavn
+  op.textContent = p.id; // vis samme navn
+  sel.appendChild(op);
+});
 
   sel.onchange = () => loadEval(sel.value);
 });
-
-    loadEval(sel.value);
-
-    sel.onchange = () => loadEval(sel.value);
 
     document.getElementById("eval-save").onclick = saveEval;
     document.getElementById("eval-plan-close").onclick = closeEvalPlanModal;
@@ -143,39 +164,58 @@ fetchPlayers().then(players => {
 
   // Hent lagret evaluering
 async function loadEval(name) {
-  if (!name) return;
-
-  const snap = await window.firestore.getDoc(
-    window.firestore.doc(window.db, "evalueringer", name)
-  );
-
-  if (!snap.exists()) {
-    document.getElementById("eval-tek1").value = "";
-    document.getElementById("eval-tek2").value = "";
-    document.getElementById("eval-tak1").value = "";
-    document.getElementById("eval-tak2").value = "";
-    document.getElementById("eval-fys1").value = "";
-    document.getElementById("eval-fys2").value = "";
-    document.getElementById("eval-kommentar").value = "";
+  if (typeof name !== "string" || name.trim() === "") {
+    console.warn("loadEval stoppet – ugyldig navn:", name);
     return;
   }
 
-  const d = snap.data();
+const ref = window.firestoreDoc(
+  window.firestore,
+  "evalueringer",
+  name
+);
+
+const snap = await window.firestoreGetDoc(ref);
+
+
+
+  if (!snap.exists()) {
+  console.log("Ingen evaluering funnet for", name);
+  // nullstill feltene
+  document.getElementById("eval-tek1").value = "";
+  document.getElementById("eval-tek2").value = "";
+  document.getElementById("eval-tak1").value = "";
+  document.getElementById("eval-tak2").value = "";
+  document.getElementById("eval-fys1").value = "";
+  document.getElementById("eval-fys2").value = "";
+  document.getElementById("eval-kommentar").value = "";
+  return;
+}
+
+const d = snap.data();
 
   document.getElementById("eval-tek1").value = d.tek1 || "";
   document.getElementById("eval-tek2").value = d.tek2 || "";
+  document.getElementById("ovel-tek").value = d.tek3 || "";
   document.getElementById("eval-tak1").value = d.tak1 || "";
   document.getElementById("eval-tak2").value = d.tak2 || "";
+  document.getElementById("ovel-tak").value = d.tak3 || "";
   document.getElementById("eval-fys1").value = d.fys1 || "";
   document.getElementById("eval-fys2").value = d.fys2 || "";
+  document.getElementById("ovel-fys").value = d.fys3 || "";
   document.getElementById("eval-kommentar").value = d.kommentar || "";
 }
 
 
   // Lagre evaluering
 async function saveEval() {
-  const name = document.getElementById("eval-player-select").value;
-  if (!name) return alert("Velg en spiller.");
+  const raw = document.getElementById("eval-player-select").value;
+  const name = typeof raw === "string" ? raw.trim() : "";
+
+  if (!name) {
+    alert("Velg en gyldig spiller.");
+    return;
+  }
 
   const obj = {
     tek1: document.getElementById("eval-tek1").value.trim(),
@@ -191,17 +231,22 @@ async function saveEval() {
     oppdatert: new Date().toISOString(),
   };
 
-  try {
-    await window.firestore.setDoc(
-      window.firestore.doc(window.db, "evalueringer", name),
-      obj
-    );
+try {
+const ref = window.firestoreDoc(
+  window.firestore,
+  "evalueringer",
+  name
+);
 
-    alert("Evaluering lagret i Firebase!");
-  } catch (err) {
-    console.error(err);
-    alert("Feil ved lagring til Firebase!");
-  }
+await window.firestoreSetDoc(ref, obj, { merge: true });
+
+
+  alert("Evaluering lagret i Firebase!");
+} catch (err) {
+  console.error(err);
+  alert("Feil ved lagring til Firebase!");
+}
+
 
   // nullstill feltene
   document.getElementById("eval-tek1").value = "";
@@ -238,6 +283,23 @@ window.addEventListener("click", function (event) {
     closeEvalPlanModal();
   }
 });
+
+const statistikkBtn = document.getElementById("statistikkBtn");
+
+if (statistikkBtn) {
+  statistikkBtn.onclick = () => {
+    loadPage("statistikk-public");
+  };
+}
+
+const refleksjonBtn = document.getElementById("refleksjonBtn");
+
+if (refleksjonBtn) {
+  refleksjonBtn.onclick = () => {
+    loadPage("refleksjon");
+  };
+}
+
 
 
 })();

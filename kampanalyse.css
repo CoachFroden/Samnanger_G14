@@ -192,3 +192,76 @@
   font-size: 0.95rem;
   color: #aaa;
 }
+.ka-print {
+  margin-top: 1.5rem;
+  background: #2e7d32;
+  border: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+}
+
+.ka-print:hover {
+  background: #388e3c;
+}
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .ka-modal,
+  .ka-modal * {
+    visibility: visible;
+  }
+
+  .ka-modal {
+    position: absolute;
+    inset: 0;
+    background: #fff;
+  }
+
+  .ka-modal-close,
+  .ka-print {
+    display: none;
+  }
+}
+.ka-detail-header {
+  text-align: center;
+  margin-bottom: 1.8rem;
+}
+
+.ka-detail-main-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.ka-detail-matchup {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #ccc;
+  margin-bottom: 0.2rem;
+}
+
+.ka-detail-date {
+  font-size: 0.9rem;
+  color: #999;
+  margin-bottom: 0.4rem;
+}
+
+.ka-detail-type {
+  font-size: 0.85rem;
+  color: #8ab4f8;
+}
+/* Skjul scrollbar i modal – men behold scrolling */
+.ka-modal-content {
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* IE / Edge legacy */
+  scroll-behavior: smooth;
+}
+
+.ka-modal-content::-webkit-scrollbar {
+  display: none;               /* Chrome / Safari */
+}

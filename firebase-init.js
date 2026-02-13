@@ -1,6 +1,15 @@
 // Importer Firebase-moduler
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  collection,
+  getDocs,
+  setDoc
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+
 
 // Firebase konfigurasjon
 export const firebaseConfig = {
@@ -18,3 +27,13 @@ export const app = initializeApp(firebaseConfig);
 
 // Firestore-tilkobling
 export const db = getFirestore(app);
+
+window.db = db;
+window.firestore = db;
+window.firestoreCollection = collection;
+window.firestoreGetDocs = getDocs;
+window.firestoreDoc = doc;
+window.firestoreGetDoc = getDoc;
+window.firestoreSetDoc = setDoc;
+
+
